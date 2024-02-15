@@ -1,4 +1,15 @@
 body {
     font-family: 'Vollkorn', Arial; /* Define Arial como a fonte preferencial, seguida de fontes genéricas sans-serif como alternativa */
     font-size: 24px;
+    color: black;
+}
+
+.nav-item{
+    font-family: 'Vollkorn';
+    font-size: 18px;
+}
+
+.a {
+    text-decoration: none;
+    color: black;
 }
