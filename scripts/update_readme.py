@@ -54,9 +54,6 @@ def get_user_repos(username: str, token: Optional[str]) -> List[Dict]:
         
         if not data:
             break
-        
-        if not data:  # Empty list
-            break
             
         repos.extend(data)
         
@@ -77,6 +74,8 @@ def get_repo_languages(owner: str, repo_name: str, token: Optional[str]) -> Dict
 def get_latest_release(owner: str, repo_name: str, token: Optional[str]) -> Optional[Dict]:
     """Fetch the latest release for a repository."""
     url = f"{GITHUB_API_BASE}/repos/{owner}/{repo_name}/releases/latest"
+    # Note: We can't use make_github_request here because 404 is a valid response
+    # (meaning no releases exist), but make_github_request raises for all errors
     headers = {"Accept": "application/vnd.github.v3+json"}
     if token:
         headers["Authorization"] = f"token {token}"
