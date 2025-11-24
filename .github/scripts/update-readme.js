@@ -25,7 +25,7 @@ function exec(command, env = {}) {
 /**
  * Get all public repositories for a user using GitHub CLI
  */
-async function getRepositories(username) {
+function getRepositories(username) {
   // Set GH_TOKEN from environment if available
   const env = process.env.GITHUB_TOKEN ? { GH_TOKEN: process.env.GITHUB_TOKEN } : {};
   
@@ -42,7 +42,7 @@ async function getRepositories(username) {
 /**
  * Get the latest release/tag for a repository using GitHub CLI
  */
-async function getLatestRelease(username, repoName) {
+function getLatestRelease(username, repoName) {
   const env = process.env.GITHUB_TOKEN ? { GH_TOKEN: process.env.GITHUB_TOKEN } : {};
   
   try {
@@ -131,9 +131,9 @@ function getLanguageLogo(language) {
 /**
  * Update README with project cards
  */
-async function updateReadme() {
+function updateReadme() {
   console.log('Fetching repositories...');
-  const repos = await getRepositories(GITHUB_USERNAME);
+  const repos = getRepositories(GITHUB_USERNAME);
   
   // Filter out the portfolio repository itself, archived repos, and forks
   const filteredRepos = repos
@@ -148,11 +148,8 @@ async function updateReadme() {
   
   for (const repo of filteredRepos) {
     console.log(`Processing: ${repo.name}`);
-    const version = await getLatestRelease(GITHUB_USERNAME, repo.name);
+    const version = getLatestRelease(GITHUB_USERNAME, repo.name);
     projectsSection += generateProjectCard(repo, version);
-    
-    // Add a small delay to avoid rate limiting
-    await new Promise(resolve => setTimeout(resolve, 100));
   }
   
   // Read current README
@@ -168,8 +165,8 @@ async function updateReadme() {
     const beforeContacts = currentReadme.substring(0, insertIndex);
     const fromContacts = currentReadme.substring(insertIndex);
     
-    // Remove old projects section if it exists
-    const cleanedBefore = beforeContacts.replace(/## 📚 My Projects[\s\S]*?(?=---|$)/g, '').trim();
+    // Remove old projects section if it exists (match from header to next --- or ## header)
+    const cleanedBefore = beforeContacts.replace(/## 📚 My Projects[\s\S]*?(?=\n---|^##|\n$)/m, '').trim();
     
     newReadme = cleanedBefore + '\n\n---\n\n' + projectsSection + '\n---\n\n' + fromContacts;
   } else {
@@ -183,7 +180,9 @@ async function updateReadme() {
 }
 
 // Run the update
-updateReadme().catch(error => {
+try {
+  updateReadme();
+} catch (error) {
   console.error('Error updating README:', error);
   process.exit(1);
-});
+}
