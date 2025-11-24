@@ -1,0 +1,71 @@
+name: Update README with Projects
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+  
+  # Weekly schedule - Every Monday at 6 AM UTC
+  schedule:
+    - cron: '0 6 * * 1'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      
+      - name: Install dependencies
+        run: |
+          pip install requests
+      
+      - name: Run update script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/update_readme.py
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet README.md; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: update README with latest projects'
+          branch: update/readme-auto-${{ github.run_number }}
+          delete-branch: true
+          title: 'chore: Update README with latest projects'
+          body: |
+            ## Automated README Update
+            
+            This PR updates the README.md with the latest information from all public repositories.
+            
+            - Updated project cards with current descriptions
+            - Updated badges (languages, releases, topics)
+            - Updated links (demo, docs, license info)
+            
+            **Generated automatically by GitHub Actions.**
+            
+            Run number: ${{ github.run_number }}
+            Triggered by: ${{ github.event_name }}
+          labels: |
+            documentation
+            automated
