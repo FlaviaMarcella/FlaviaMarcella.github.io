@@ -91,7 +91,7 @@ function generateProjectCard(repo, version) {
   
   // Filter out empty badges and join with spaces
   const badges = [languageBadge, versionBadge, starsBadge, forksBadge]
-    .filter(badge => badge)
+    .filter(badge => badge.length > 0)
     .join(' ');
   
   let card = `### [${repo.name}](${repoUrl})\n\n`;
@@ -171,7 +171,7 @@ function updateReadme() {
     const fromContacts = currentReadme.substring(insertIndex);
     
     // Remove old projects section if it exists (match from header to next --- or ## header)
-    const cleanedBefore = beforeContacts.replace(/## 📚 My Projects[\s\S]*?(?=\n---|(?:\n|^)##|\n$)/m, '').trim();
+    const cleanedBefore = beforeContacts.replace(/## 📚 My Projects[\s\S]*?(?=\n---|(?=\n##|^##)|\n$)/m, '').trim();
     
     newReadme = cleanedBefore + '\n\n---\n\n' + projectsSection + '\n---\n\n' + fromContacts;
   } else {

@@ -55,6 +55,20 @@ Each repository is displayed as a card containing:
 
 ### Example Output
 
+**With version badge:**
+
+```markdown
+### [project-name](https://github.com/FlaviaMarcella/project-name)
+
+![C](https://img.shields.io/badge/C-blue?style=flat-square&logo=c) ![Version](https://img.shields.io/badge/version-v1.0.0-green?style=flat-square) ![Stars](https://img.shields.io/github/stars/FlaviaMarcella/project-name?style=flat-square) ![Forks](https://img.shields.io/github/forks/FlaviaMarcella/project-name?style=flat-square)
+
+Description of the project goes here.
+
+[📦 Repository](https://github.com/FlaviaMarcella/project-name) | [🌐 Demo](https://example.com)
+```
+
+**Without version badge:**
+
 ```markdown
 ### [project-name](https://github.com/FlaviaMarcella/project-name)
 

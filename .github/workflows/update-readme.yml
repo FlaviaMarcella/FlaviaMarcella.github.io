@@ -32,7 +32,9 @@ jobs:
       - name: Check for changes
         id: git-check
         run: |
-          git diff --exit-code README.md || echo "changed=true" >> $GITHUB_OUTPUT
+          if ! git diff --quiet README.md; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
       
       - name: Create Pull Request
         if: steps.git-check.outputs.changed == 'true'
