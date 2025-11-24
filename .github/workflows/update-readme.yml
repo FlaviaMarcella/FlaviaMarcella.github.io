@@ -1,0 +1,68 @@
+name: Update README with Projects
+
+on:
+  workflow_dispatch:  # Manual trigger
+  schedule:
+    - cron: '0 0 * * 0'  # Run every Sunday at midnight UTC (weekly)
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      
+      - name: Update README with project cards
+        run: node .github/scripts/update-readme.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code README.md || echo "changed=true" >> $GITHUB_OUTPUT
+      
+      - name: Create Pull Request
+        if: steps.git-check.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: update README with latest project cards'
+          branch: update/readme-auto-${{ github.run_number }}
+          delete-branch: true
+          title: '🤖 Update README with latest projects'
+          body: |
+            ## Automated README Update
+            
+            This PR updates the README.md with the latest information from all public repositories.
+            
+            ### Changes:
+            - ✅ Updated project cards with current repository details
+            - ✅ Refreshed badges (language, stars, forks, versions)
+            - ✅ Updated descriptions and links
+            
+            **Generated automatically by GitHub Actions**
+            
+            ---
+            
+            Please review the changes and merge if everything looks good!
+          labels: |
+            automated
+            documentation
+          assignees: FlaviaMarcella
+      
+      - name: No changes detected
+        if: steps.git-check.outputs.changed != 'true'
+        run: echo "No changes to README.md - skipping PR creation"
