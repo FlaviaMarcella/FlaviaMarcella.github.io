@@ -1,63 +1,385 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/style.css">
-
-    <!-- Javascript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="js/bootstrap.bundle.js"></script>
-
-    <title>Portfólio by Flávia Marcella</title>
+    <title>Meu Portfólio - Desenvolvedor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#3b82f6', // Azul Tailwind (Blue 500)
+                        dark: '#1e293b', // Slate 800
+                        light: '#f8fafc', // Slate 50
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .nav-link:hover {
+            color: #3b82f6;
+            transition: color 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .skill-badge {
+            transition: all 0.2s ease;
+        }
+        .skill-badge:hover {
+            background-color: #3b82f6;
+            color: white;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
+<body class="antialiased selection:bg-primary selection:text-white">
 
-<body>
-    <div class="container-fluid">
-
-    <nav id="nav-bar">
-        <div class="container bg-secondary ">
-            <!-- Nav tabs -->
-            <ul class="navbar-nav justify-content-center" id="navBarId">
-                <li class="nav-item" id="aboutMe">
-                    <a href="#aboutMe" class="nav-link text-light" data-bs-toggle="navbarSupportedContent">About Me</a>
-                </li>
-                <li class="nav-item" id="certificate">
-                    <a href="#certificate" class="nav-link text-light" data-bs-toggle="navbarSupportedContent">Certificate</a>
-                </li>
-                <li class="nav-item" id="timeLine">
-                    <a href="#timeLine" class="nav-link text-light" data-bs-toggle="navbarSupportedContent">Time Line</a>
-                </li>
-                <li class="nav-item" id="contact">
-                    <a href="#contact" class="nav-link text-light" data-bs-toggle="navbarSupportedContent">Contact me</a>
-                </li>
-            </ul>
+    <nav class="fixed w-full z-50 glass-effect top-0 border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <!-- Substitua pelo seu nome ou logo -->
+                    <span class="font-bold text-2xl tracking-tighter text-dark hover:text-primary transition-colors cursor-pointer" onclick="window.scrollTo(0,0)">{'<Flávia/>'}</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#sobre" class="nav-link font-medium text-gray-600">Sobre Mim</a>
+                    <a href="#skills" class="nav-link font-medium text-gray-600">Skills</a>
+                    <a href="#projetos" class="nav-link font-medium text-gray-600">Projetos</a>
+                    <a href="#contato" class="nav-link font-medium text-gray-600">Contato</a>
+                </div>
+                <!-- Menu Mobile (simplificado para este exemplo) -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </nav>
-    <section id="aboutMe">
-        <p>Teste teste</p>
-    </section>
-    <section id="certificate">
 
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-16 bg-gradient-to-br from-light to-blue-50 relative overflow-hidden">
+        <!-- Círculos decorativos no fundo -->
+        <div class="absolute top-20 left-10 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob"></div>
+        <div class="absolute top-40 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-2xl opacity-30 animate-blob animation-delay-2000"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <img src="/SquareProfissional.jpg" alt="Minha Foto" class="w-32 h-32 md:w-40 md:h-40 rounded-full mx-auto mb-6 object-cover border-4 border-white shadow-lg">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-dark tracking-tight mb-4">
+                    Muito mais que código. <br class="hidden md:block" />
+                    Sou <span class="text-primary text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600">Flávia Gonçalves</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto font-light">
+                    Transformando problemas reais em soluções concretas. Desenvolvedora Backend com foco no ecossistema <strong>Java e Spring Boot</strong>.
+                </p>
+                <div class="flex justify-center gap-4">
+                    <a href="#projetos" class="bg-primary hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                        Ver Projetos
+                    </a>
+                    <a href="#contato" class="bg-white hover:bg-gray-50 text-dark border border-gray-300 font-semibold py-3 px-8 rounded-full shadow-sm transition-all duration-300">
+                        Falar Comigo
+                    </a>
+                </div>
+                <div class="mt-8 flex justify-center gap-6">
+                    <a href="https://github.com/FlaviaMarcella" target="_blank" class="text-gray-500 hover:text-dark text-2xl transition-colors"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/flaviamarcella" target="_blank" class="text-gray-500 hover:text-blue-700 text-2xl transition-colors"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
     </section>
-    <section id="timeLine">
 
-    </section>
-    <section id="contact">
+    <section id="sobre" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-dark mb-4">Minha Essência (O README.md Humano) 📖</h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded"></div>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Quem sou eu quando desligo o monitor e quem sou eu quando estou focada no terminal.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                
+                <!-- Coluna 1: O Lado Humano -->
+                <div class="space-y-8">
+                    <div class="bg-blue-50 p-8 rounded-3xl border border-blue-100 shadow-sm relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10">
+                            <i class="fas fa-fingerprint text-8xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-dark mb-4 flex items-center"><i class="fas fa-heart text-red-500 mr-3"></i> Lado Humano</h3>
+                        <p class="text-gray-700 leading-relaxed mb-6">
+                            Meu contato com a tecnologia começou no Ensino Médio Técnico. Fui de dar suporte e configurar roteadores até estruturar APIs corporativas complexas. Para mim, a tecnologia só faz sentido se for para construir pontes. Acredito profundamente que a <strong>excelência técnica só faz sentido quando caminha lado a lado com a empatia pelo usuário final</strong>.
+                        </p>
+                        
+                        <h4 class="font-bold text-dark mb-3">Meus Combustíveis ☕🔧</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white p-4 rounded-xl flex items-center gap-3 shadow-sm">
+                                <i class="fas fa-mug-hot text-amber-700 text-xl"></i>
+                                <span class="text-sm font-medium text-gray-600">Café (Essencial!)</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl flex items-center gap-3 shadow-sm">
+                                <i class="fas fa-network-wired text-purple-600 text-xl"></i>
+                                <span class="text-sm font-medium text-gray-600">Entender o "Por trás"</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl flex items-center gap-3 shadow-sm">
+                                <i class="fas fa-users text-green-500 text-xl"></i>
+                                <span class="text-sm font-medium text-gray-600">Equipes Colaborativas</span>
+                            </div>
+                            <div class="bg-white p-4 rounded-xl flex items-center gap-3 shadow-sm">
+                                <i class="fas fa-book-reader text-orange-500 text-xl"></i>
+                                <span class="text-sm font-medium text-gray-600">Aprender coisas novas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Coluna 2: O Terminal de Sinceridade (Qualidades e Defeitos) -->
+                <div class="bg-dark rounded-xl shadow-2xl overflow-hidden font-mono text-sm border border-gray-700">
+                    <!-- Fake Window Header -->
+                    <div class="bg-gray-800 px-4 py-3 flex items-center border-b border-gray-700">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="mx-auto text-gray-400 text-xs">perfil_sincero.json</div>
+                    </div>
+                    <!-- Terminal Content -->
+                    <div class="p-6 text-gray-300">
+                        <p class="text-green-400 mb-2">~ % cat perfil_sincero.json</p>
+                        <p class="text-gray-100">{</p>
+                        <div class="pl-6 space-y-2">
+                            <p><span class="text-blue-400">"nome"</span>: <span class="text-orange-300">"Flávia Gonçalves"</span>,</p>
+                            <p><span class="text-blue-400">"status_atual"</span>: <span class="text-orange-300">"Graduanda em CC & Desenvolvedora Backend"</span>,</p>
+                            <br>
+                            <p class="text-gray-500">// O que eu faço muito bem)</p>
+                            <p><span class="text-blue-400">"super_poderes"</span>: [</p>
+                            <p class="pl-4 text-orange-300">"Autodidata: aprendo novas tecnologias rápido",</p>
+                            <p class="pl-4 text-orange-300">"Visão de ponta a ponta (de Redes ao Backend)",</p>
+                            <p class="pl-4 text-orange-300">"Comunicação e liderança colaborativa"</p>
+                            <p>],</p>
+                            <br>
+                            <p class="text-gray-500">// Sendo 100% transparente (meus defeitos)</p>
+                            <p><span class="text-blue-400">"bugs_conhecidos"</span>: [</p>
+                            <p class="pl-4 text-orange-300">"Posso me perder no tempo otimizando triggers SQL",</p>
+                            <p class="pl-4 text-orange-300">"Exigente demais comigo mesma",</p>
+                            <p class="pl-4 text-orange-300">"As vezes tento resolver os BOs de UI/UX também"</p>
+                            <p>],</p>
+                            <br>
+                            <p><span class="text-blue-400">"filosofia_de_trabalho"</span>: <span class="text-orange-300">"Errar rápido, aprender de forma proativa e não esquecer de quem vai usar o sistema no final."</span></p>
+                        </div>
+                        <p class="text-gray-100 mt-2">}</p>
+                        <p class="text-green-400 mt-4 animate-pulse">~ % <span class="inline-block w-2 h-4 bg-gray-400 align-middle"></span></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
-</div>
-</div>
+
+    <section id="skills" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-dark mb-4">Minhas Ferramentas</h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded"></div>
+                <p class="mt-4 text-gray-600">O que eu uso para transformar ideias em realidade.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Hard Skills -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-dark mb-2 flex items-center"><i class="fas fa-hammer text-primary mr-3"></i> Meu Cinto de Utilidades</h3>
+                    <p class="text-gray-500 text-sm mb-6">As tecnologias que utilizo para estruturar o backend e persistir dados.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="skill-badge px-4 py-2 bg-red-50 text-red-700 border border-red-100 rounded-full font-medium text-sm cursor-default">Java & Spring Boot</span>
+                        <span class="skill-badge px-4 py-2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full font-medium text-sm cursor-default">APIs REST</span>
+                        <span class="skill-badge px-4 py-2 bg-orange-50 text-orange-700 border border-orange-100 rounded-full font-medium text-sm cursor-default">Oracle & MySQL</span>
+                        <span class="skill-badge px-4 py-2 bg-gray-100 text-gray-700 border border-gray-200 rounded-full font-medium text-sm cursor-default">Git & GitLab</span>
+                        <span class="skill-badge px-4 py-2 bg-blue-50 text-blue-800 border border-blue-200 rounded-full font-medium text-sm cursor-default">Docker</span>
+                        <span class="skill-badge px-4 py-2 bg-yellow-50 text-yellow-700 border border-yellow-100 rounded-full font-medium text-sm cursor-default">Firebase</span>
+                        <span class="skill-badge px-4 py-2 bg-purple-50 text-purple-700 border border-purple-100 rounded-full font-medium text-sm cursor-default">Figma (UI/UX)</span>
+                        <span class="skill-badge px-4 py-2 bg-green-50 text-green-700 border border-green-100 rounded-full font-medium text-sm cursor-default">HTML/CSS & Bootstrap</span>
+                    </div>
+                </div>
+
+                <!-- Soft Skills / O que estou aprendendo -->
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-dark mb-2 flex items-center"><i class="fas fa-brain text-purple-500 mr-3"></i> Soft Skills que me destacam</h3>
+                        <p class="text-gray-500 text-sm mb-4">Porque tech skills qualquer um aprende, comportamento não.</p>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i> <strong>Proatividade & Autodidata:</strong> Assumo o controle do meu aprendizado. Se a demanda exige, eu vou atrás e aprendo a tecnologia.</li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i> <strong>Escuta Ativa:</strong> Transito bem em equipes multidisciplinares pois sei ouvir as reais necessidades antes de codar.</li>
+                            <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i> <strong>Responsabilidade:</strong> O "senso de dono" que aplico no Polo EMBRAPII e nos meus projetos acadêmicos.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-gray-100">
+                        <h4 class="font-bold text-dark mb-3 text-sm uppercase tracking-wider text-gray-500">Onde estou focando minha evolução agora:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-lg text-xs border border-gray-200 border-dashed">Arquitetura de Microsserviços</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-lg text-xs border border-gray-200 border-dashed">Testes de API avançados</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-lg text-xs border border-gray-200 border-dashed">Inglês</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-700 rounded-lg text-xs border border-purple-200 border-solid">C# e .NET (Em evolução)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projetos" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-dark mb-4">Projetos em Destaque</h2>
+                <div class="w-20 h-1 bg-primary mx-auto rounded"></div>
+                <p class="mt-4 text-gray-600">Da academia para o mercado: construindo soluções com impacto real.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Projeto 1: Expense Control (NOVO) -->
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm flex flex-col h-full">
+                    <div class="w-full h-48 bg-gradient-to-r from-purple-600 to-indigo-800 flex items-center justify-center border-b border-gray-100 relative">
+                        <i class="fas fa-wallet text-6xl text-white opacity-80"></i>
+                        <span class="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">Novo Aprendizado</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold text-dark mb-2">Expense Control (API)</h3>
+                        <p class="text-gray-600 mb-4 flex-grow text-sm">Desenvolvimento de uma API REST para controle de despesas utilizando C# e .NET. Este projeto marca minha imersão neste novo ecossistema, aplicando conceitos de persistência e regras de negócio.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs font-semibold bg-purple-100 text-purple-800 px-2 py-1 rounded">C#</span>
+                            <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-1 rounded">.NET</span>
+                            <span class="text-xs font-semibold bg-gray-100 text-gray-800 px-2 py-1 rounded">APIs REST</span>
+                        </div>
+                        <div class="flex gap-3 mt-auto">
+                            <a href="#" class="text-sm font-medium text-gray-600 hover:text-dark flex items-center"><i class="fab fa-github mr-1"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 2: Novo SISMET -->
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm flex flex-col h-full">
+                    <div class="w-full h-48 bg-gradient-to-r from-green-600 to-emerald-800 flex items-center justify-center border-b border-gray-100 relative">
+                        <i class="fas fa-cloud-sun-rain text-6xl text-white opacity-80"></i>
+                        <span class="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-sm">EMBRAPII / COOXUPÉ</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold text-dark mb-2">Novo SISMET (Gestão Meteorológica)</h3>
+                        <p class="text-gray-600 mb-4 flex-grow text-sm">Desenvolvimento backend da lógica de negócio e estruturação de APIs REST seguras para ambientes agrícolas corporativos, com foco em triggers e procedures no banco de dados.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs font-semibold bg-red-100 text-red-800 px-2 py-1 rounded">Java</span>
+                            <span class="text-xs font-semibold bg-blue-100 text-blue-800 px-2 py-1 rounded">APIs REST</span>
+                            <span class="text-xs font-semibold bg-orange-100 text-orange-800 px-2 py-1 rounded">Oracle SQL</span>
+                        </div>
+                        <div class="flex gap-3 mt-auto">
+                            <a href="#" class="text-sm font-medium text-gray-600 hover:text-dark flex items-center"><i class="fas fa-lock mr-1"></i> Projeto Corporativo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 3: Aleitamento -->
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm flex flex-col h-full">
+                    <div class="w-full h-48 bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center border-b border-gray-100">
+                        <i class="fas fa-baby text-6xl text-white opacity-80"></i>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold text-dark mb-2">CMS - Decisões Clínicas (Saúde)</h3>
+                        <p class="text-gray-600 mb-4 flex-grow text-sm">Sistema web de apoio ao aleitamento materno. Arquitetura full-stack desenvolvida de ponta a ponta, com integração em tempo real para app móvel. Apresentado na 17ª JCT IFSULDEMINAS.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs font-semibold bg-green-100 text-green-800 px-2 py-1 rounded">Spring Boot</span>
+                            <span class="text-xs font-semibold bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Firebase</span>
+                            <span class="text-xs font-semibold bg-gray-100 text-gray-800 px-2 py-1 rounded">Thymeleaf</span>
+                        </div>
+                        <div class="flex gap-3 mt-auto">
+                            <a href="#" class="text-sm font-medium text-gray-600 hover:text-dark flex items-center"><i class="fab fa-github mr-1"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projeto 3: SmartAgro -->
+                <div class="project-card bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm flex flex-col h-full">
+                    <div class="w-full h-48 bg-gradient-to-r from-yellow-500 to-orange-500 flex items-center justify-center border-b border-gray-100">
+                        <i class="fas fa-mobile-alt text-6xl text-white opacity-80"></i>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-xl font-bold text-dark mb-2">App SmartAgro - Café</h3>
+                        <p class="text-gray-600 mb-4 flex-grow text-sm">Projeto de extensão voltado ao desenvolvimento mobile para agronegócio. Prototipação de interface de alta fidelidade e desenvolvimento prático de funcionalidades Android.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs font-semibold bg-purple-100 text-purple-800 px-2 py-1 rounded">Kotlin (Android)</span>
+                            <span class="text-xs font-semibold bg-pink-100 text-pink-800 px-2 py-1 rounded">Figma (UI/UX)</span>
+                        </div>
+                        <div class="flex gap-3 mt-auto">
+                            <a href="#" class="text-sm font-medium text-gray-600 hover:text-dark flex items-center"><i class="fab fa-github mr-1"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="https://github.com/seugithub" target="_blank" class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                    Ver todos os repositórios no GitHub <i class="fab fa-github ml-2 text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="py-20 bg-dark text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-4">Vamos conversar?</h2>
+            <p class="text-gray-400 mb-8 text-lg">Busco um estágio onde eu possa aprofundar minhas habilidades em Java e Spring Boot em projetos de maior escala. Quer me ajudar nesse desafio?</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-12">
+                <a href="mailto:flaviamgm011@gmail.com" class="flex items-center gap-3 bg-white/10 hover:bg-white/20 p-4 rounded-xl transition-colors w-full sm:w-auto justify-center">
+                    <i class="fas fa-envelope text-2xl text-primary"></i>
+                    <span class="font-medium">flaviamgm011@gmail.com</span>
+                </a>
+                <a href="https://wa.me/5535998005366" target="_blank" class="flex items-center gap-3 bg-white/10 hover:bg-white/20 p-4 rounded-xl transition-colors w-full sm:w-auto justify-center">
+                    <i class="fab fa-whatsapp text-2xl text-green-400"></i>
+                    <span class="font-medium">(35) 99800-5366</span>
+                </a>
+            </div>
+            
+            <p class="text-gray-500 text-sm border-t border-gray-800 pt-8">
+                &copy; <span id="year"></span> Flávia Gonçalves. Feito com ❤️ e Tailwind CSS.
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Atualiza o ano no rodapé automaticamente
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Adiciona background na navbar ao rolar a página
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-md');
+                nav.classList.replace('glass-effect', 'bg-white');
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.classList.replace('bg-white', 'glass-effect');
+            }
+        });
+    </script>
 </body>
-
-<header></header>
-
 </html>
